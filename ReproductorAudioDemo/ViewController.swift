@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var imgPortada: UIImageView!
     @IBOutlet weak var duracion: UITextField!
     @IBOutlet weak var actual: UITextField!
+    @IBOutlet weak var avance: UISlider!
     private var lista = Array<Array<String>>()
     private var selec = ""
     private var reproductor : AVAudioPlayer!
@@ -43,6 +44,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }catch {
             print("Error al cargar el archivo de sonido")
         }
+        avance.maximumValue = 10.0
+        avance.minimumValue = 0.0
+        avance.value = 0.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -145,7 +149,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let minutos : Int = Int(segundos / 60)
         let temp1 = segundos - Double(minutos * 60)
         let segun2 : Int = Int(temp1)
-
+        
+        avance.value = Float(temp1)
+        
         return "\(minutos):\(segun2)"
     }
     
